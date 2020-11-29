@@ -2,7 +2,7 @@ import React from "react";
 import Cities from "./citiesComponent";
 
 export default function States({ inputState, setInputState }) {
-  const handelStateClick = (index) => {
+  const handelState = (index) => {
     let inputStateCopy = { ...inputState };
     inputStateCopy.cities = inputStateCopy.states[index].cities;
     inputStateCopy.towns = inputStateCopy.cities[0].towns;
@@ -18,7 +18,7 @@ export default function States({ inputState, setInputState }) {
         <div
           key={state.name}
           id={`state${index + 1}`}
-          onClick={() => handelStateClick(index)}
+          onClick={() => handelState(index)}
         >
           {state.name}
         </div>
