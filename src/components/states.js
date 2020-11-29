@@ -1,5 +1,5 @@
 import React from "react";
-import Cities from "./citiesComponent";
+import Cities from "./cities";
 
 export default function States({ inputState, setInputState }) {
   const handelState = (index) => {
