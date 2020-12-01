@@ -156,17 +156,70 @@ const states = [
 ];
 
 function App() {
-  const [inputState, setInputState] = useState({
-    states: [...states],
-    cities: [],
-    towns: [],
-    isStateClicked: false,
-    isCityClicked: false
+
+
+  const [index, setIndex] = React.useState({
+    indexForCity: 0,
+    indexForTown: 0
   });
+
+  const handelClick = (elementIndex, value) => {
+    let indexCopy = { ...index };
+    if (value === "cities") {
+      indexCopy.indexForCity = elementIndex;
+      //indexCopy.indexForTown = 0;
+    } else if(value === "towns"){
+      indexCopy.indexForTown = elementIndex;
+    }
+
+    setIndex(indexCopy);
+  };
+
 
   return (
     <div id="main">
-      <States inputState={inputState} setInputState={setInputState} />
+      <label for="states">
+        <b>States</b>
+      </label>
+      <div>
+        {states.map((state, i) => (
+          <div
+            id={`state${i + 1}`}
+            key={state.name}
+            onClick={() => handelClick(i, "cities")}
+          >
+            {state.name}
+          </div>
+        ))}
+      </div>
+
+      <label for="cities">
+        <b>Cities</b>
+      </label>
+      <div>
+        {states[index.indexForCity].cities.map((city, i) => (
+          <div
+            id={`city${i + 1}`}
+            key={city.name}
+            onClick={() => handelClick(i, "towns")}
+          >
+            {city.name}
+          </div>
+        ))}
+      </div>
+
+      <label for="towns">
+        <b>Towns</b>
+      </label>
+      <div>
+        {states[index.indexForCity].cities[index.indexForTown].towns.map(
+          (town, i) => (
+            <div id={`town${i + 1}`} key={town.name}>
+              {town.name}
+            </div>
+          )
+        )}
+      </div>
     </div>
   );
 }
