@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
-import "./../styles/App.css";
-import States from "./states";
+import "../styles/App.css";
 
+import React, { Component, useEffect, useState } from "react";
+import States from "./states";
 // Do not alter the states const and values inside it.
 const states = [
   {
@@ -156,17 +156,11 @@ const states = [
 ];
 
 function App() {
-  const [inputState, setInputState] = useState({
-    states: [...states],
-    cities: [],
-    towns: [],
-    isStateClicked: false,
-    isCityClicked: false
-  });
-
   return (
     <div id="main">
-      <States inputState={inputState} setInputState={setInputState} />
+      {states.map((state, index) => (
+        <States id={`state${index + 1}`} state={state} />
+      ))}
     </div>
   );
 }
