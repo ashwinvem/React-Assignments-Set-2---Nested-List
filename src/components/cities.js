@@ -2,8 +2,6 @@ import React, {useState} from "react";
 
 import Towns from "./towns";
 
-import "../styles/App.css";
-
 export default function Cities(props) {
   const [toggleTownDisplay, setToggleTownDisplay] = useState(false);
   const handleCity = () => {
