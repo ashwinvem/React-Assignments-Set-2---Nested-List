@@ -1,32 +1,19 @@
 import React from "react";
+
 import Cities from "./cities";
 
-export default function States({ inputState, setInputState }) {
-  const handelState = (index) => {
-    let inputStateCopy = { ...inputState };
-    inputStateCopy.cities = inputStateCopy.states[index].cities;
-    inputStateCopy.towns = inputStateCopy.cities[0].towns;
-    inputStateCopy.isStateClicked = true;
-    inputStateCopy.isCityClicked = false;
-
-    setInputState(inputStateCopy);
+export default function States(props) {
+  const [toggleCityDisplay, setToggleCityDisplay] = React.useState(false);
+  const handleState = () => {
+    setToggleCityDisplay(!toggleCityDisplay);
   };
-
   return (
     <>
-      {inputState.states.map((state, index) => (
-        <div
-          key={state.name}
-          id={`state${index + 1}`}
-          onClick={() => handelState(index)}
-        >
-          {state.name}
-        </div>
-      ))}
-      <br />
-      {inputState.isStateClicked && (
-        <Cities inputState={inputState} setInputState={setInputState} />
-      )}
+      <div onClick={handleState}>{props.state.name}</div>
+      {toggleCityDisplay &&
+        props.state.cities.map((city, index) => (
+          <Cities id={`city${index + 1}`} city={city} />
+        ))}
     </>
   );
 }
